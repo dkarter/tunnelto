@@ -1,32 +1,25 @@
-# fly.toml file generated for t2-svc on 2021-03-28T21:42:37-04:00
+# fly.toml file generated for tnnl on 2022-11-11T22:46:23-06:00
 
-app = "t2-old"
-
+app = "tnnl"
 kill_signal = "SIGINT"
 kill_timeout = 5
 
-
 [env]
-  ALLOWED_HOSTS = "t2-svc.fly.dev,2.tunnelto.dev,t2-old.fly.dev,tunnelto.dev"
+  ALLOWED_HOSTS = "tnnl.fly.dev,tnnl.me,console.lol"
+  BLOCKED_SUB_DOMAINS = "dashboard"
   NET_PORT = 10002
-  BLOCKED_SUB_DOMAINS = "wormhole,dashboard,2,myapp"
-  RUST_LOG="tunnelto_server=debug"
+  RUST_LOG = "tunnelto_server=debug"
   TUNNEL_HOST = "tunnelto.dev"
 
 [experimental]
-  private_network=true
+  private_network = true
 
 [[services]]
   internal_port = 5000
   protocol = "tcp"
-
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = "10001"
 
   [[services.http_checks]]
     interval = 10000
@@ -35,17 +28,16 @@ kill_timeout = 5
     protocol = "http"
     timeout = 20000
 
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = "10001"
+
 [[services]]
   internal_port = 8080
   protocol = "tcp"
-
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = "443"
 
   [[services.http_checks]]
     interval = 10000
@@ -53,3 +45,7 @@ kill_timeout = 5
     path = "/0xDEADBEEF_HEALTH_CHECK"
     protocol = "http"
     timeout = 20000
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = "443"
