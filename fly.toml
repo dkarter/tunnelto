@@ -1,4 +1,4 @@
-# fly.toml file generated for tnnl on 2022-11-11T22:46:23-06:00
+# fly.toml file generated for tnnl on 2022-11-12T00:04:00-06:00
 
 app = "tnnl"
 kill_signal = "SIGINT"
@@ -9,7 +9,7 @@ kill_timeout = 5
   BLOCKED_SUB_DOMAINS = "dashboard"
   NET_PORT = 10002
   RUST_LOG = "tunnelto_server=debug"
-  TUNNEL_HOST = "tunnelto.dev"
+  TUNNEL_HOST = "console.lol"
 
 [experimental]
   private_network = true
@@ -17,6 +17,7 @@ kill_timeout = 5
 [[services]]
   internal_port = 5000
   protocol = "tcp"
+
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20
@@ -35,6 +36,7 @@ kill_timeout = 5
 [[services]]
   internal_port = 8080
   protocol = "tcp"
+
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20
